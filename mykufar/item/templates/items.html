@@ -8,7 +8,7 @@
             <form method="get" action="{% url 'item:items' %}">
                 <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query }}" placeholder="Найти...">
 
-                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Найти</button>
+                <button class="mt-2 py-3 px-6 text-lg bg-gray-500 text-white rounded-xl">Найти</button>
             </form>
 
             <hr class="my-6">
@@ -28,7 +28,9 @@
             <p class="font-semibold">Очистить фильтр</p>
 
             <ul>
-                <li><a href="{% url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Очистить</a>
+                <li><a href="{% url 'item:items' %}" class="mt-2 py-3 px-8 inline-block bg-gray-500 text-lg rounded-xl text-white">Очистить</a>
+                </li>
+            </ul>
         </div>
 
         <div class="col-span-3">

@@ -1,12 +1,6 @@
-from django.shortcuts import render, redirect, get_object_or_404
-# from django.contrib.auth.decorators import login_required
-# from django.db.models import Q
-# from .forms import NewProductForm, EditProductForm, SignupForm, ProductFilterForm
+from django.shortcuts import render, redirect
+
 from item.models import Category, Item
-# from rest_framework import viewsets
-# from rest_framework.permissions import AllowAny
-# from .serializers import CategorySerializer, ProductSerializer
-# from django.contrib.auth.models import User
 from .forms import SignupForm
 
 
@@ -36,4 +30,3 @@ def signup(request):
     return render(request, 'signup.html',{
         'form':form
     })
-
