@@ -26,4 +26,5 @@ urlpatterns = [
     path('item/', include('item.urls')),
     path('tools/', include('tools.urls')),
     path('inbox/', include('conversation.urls')),
+    path('elk/', include('elk.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
