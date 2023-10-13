@@ -1,4 +1,4 @@
-from django.shortcuts import render
+# from django.shortcuts import render
 import abc
 
 from django.http import HttpResponse
@@ -12,6 +12,7 @@ from item.models import Item, Category
 from elk.serializers import CategorySerializer, ItemSerializer, UserSerializer
 from elk.documents import ItemDocument, UserDocument, CategoryDocument
 
+
 class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
@@ -23,6 +24,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
+
 
 
 class PaginatedElasticSearchAPIView(APIView, LimitOffsetPagination):
@@ -47,6 +49,7 @@ class PaginatedElasticSearchAPIView(APIView, LimitOffsetPagination):
         except Exception as e:
             return HttpResponse(e, status=500)
 
+# views
 
 class SearchUsers(PaginatedElasticSearchAPIView):
     serializer_class = UserSerializer
@@ -79,9 +82,10 @@ class SearchItems(PaginatedElasticSearchAPIView):
         return Q(
                 'multi_match', query=query,
                 fields=[
-                    'nane',
+                    'name',
                     'created_by',
-                    'description',
-                    'price',
-                    'created_at'
-                ], fuzziness='auto')
+                    # 'category',
+                    # 'description',
+                    # 'price',
+                    # 'created_at'
+                ], minimum_should_match=1, fuzziness='auto')

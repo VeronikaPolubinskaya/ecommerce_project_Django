@@ -1,7 +1,0 @@
-http.host: "0.0.0.0"
-
-#filter {
-#  if [fileset][module] == "django" {
-#     json { source => "message" }
-#  }
-#}

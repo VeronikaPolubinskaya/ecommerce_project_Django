@@ -44,9 +44,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'item.apps.ItemConfig',
     'tools.apps.ToolsConfig',
+    'django_elasticsearch_dsl',
     'conversation.apps.ConversationConfig',
     'elk.apps.ElkConfig',
-    'django_elasticsearch_dsl',
+    # 'django_elasticsearch_dsl_drf',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,10 @@ MEDIA_ROOT = BASE_DIR/'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 25
 }
@@ -144,7 +149,8 @@ REST_FRAMEWORK = {
 
 ELASTICSEARCH_DSL = {
     'default': {
-        'hosts': 'localhost:9200'
+        'hosts': 'http://localhost:9200/',
+        'http_auth': ('elastic', 'MyPw123')
     },
 }
 

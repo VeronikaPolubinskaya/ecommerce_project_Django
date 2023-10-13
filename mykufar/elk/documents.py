@@ -1,8 +1,16 @@
+from elasticsearch import Elasticsearch
+
 from django.contrib.auth.models import User
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
+from elasticsearch_dsl.connections import connections
 
 from item.models import Category, Item
+
+
+class ElasticsearchWithAuth(Elasticsearch):
+    def init_connection(self):
+        connections.create_connection(hosts=['localhost'], http_auth=('elastic', 'MyPw123'))
 
 @registry.register_document
 class UserDocument(Document):
@@ -23,7 +31,7 @@ class UserDocument(Document):
 
 @registry.register_document
 class CategoryDocument(Document):
-    # id = fields.IntegerField()
+    id = fields.IntegerField()
 
     class Index:
         name = 'categories'
